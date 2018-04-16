@@ -1,0 +1,93 @@
+#!/bin/bash
+#
+# tomcat        this script starts and stops the tomcat7 daemon
+#
+# chkconfig: 2345 80 30
+# description:  tomcat is an HTTP(S) server, HTTP(S) reverse \
+# processname:  tomcat
+#
+
+### BEGIN INIT INFO
+# Provides: tomcat
+# Required-Start: $local_fs $network $remote_fs
+# Required-Stop: $local_fs $network $remote_fs
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: start and stop tomcat
+# Description:  Tomcat is an HTTP(S) server, HTTP(S) reverse \
+### END INIT INFO
+
+## Source function library.
+. /etc/rc.d/init.d/functions
+
+if [ "$NETWORKING" = "no" ]
+then
+  exit 0
+fi
+
+CATALINA_HOME="/opt/tomcat"
+export CATALINA_HOME
+
+user=tomcat
+PROG=$CATALINA_HOME
+
+start () {
+  echo -n $"Starting `basename $PROG`: "
+  before_running=`ps ax | grep -v grep | grep java | grep -cw $PROG`
+
+  if [ $before_running -eq 0 ]; then
+    daemon --user=$user ${CATALINA_HOME}/bin/startup.sh >/dev/null 2>&1
+    RUNNING=`ps ax | grep -v grep | grep java | grep -cw $PROG`
+    if [ $RUNNING -gt 0 ]; then
+      echo_success
+    else
+      echo_failure
+    fi
+    echo
+  else
+    echo  "is already running."
+  fi
+}
+
+stop(){
+  daemon --user=$user ${CATALINA_HOME}/bin/shutdown.sh >/dev/null 2>&1
+  sleep 3
+  PID=`ps ax | grep -v grep | grep java | grep -w $PROG | awk '{print $1}'`
+  echo -n "Stopping `basename $PROG`:"
+  if [ "x$PID" != "x" ]; then
+    sleep 30
+    kill -9 $PID
+  fi
+  RUNNING=`ps ax | grep -v grep | grep java | grep -cw $PROG`
+  if [ $RUNNING -gt 0 ] ; then
+    echo_failure
+  else
+    echo_success
+  fi
+  echo
+}
+
+restart () {
+  stop
+  sleep 3
+  start
+}
+
+# See how we were called.
+case "$1" in
+  start)
+  start
+  ;;
+  stop)
+  stop
+  ;;
+  restart|reload|force-reload)
+  restart
+  ;;
+  *)
+  echo $"Usage: $0 {start|stop|restart}"
+  RETVAL=2
+  ;;
+esac
+
+exit $RETVAL
