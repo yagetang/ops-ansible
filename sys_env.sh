@@ -41,6 +41,28 @@ case ${get_envnu:0:3} in
          ;; 
  esac
 
+#转换地区编码
+case ${get_envnu:3:3} in
+         001)
+           envArea="cqyb"
+         ;;
+         010)
+           envArea="hd1b"
+         ;;
+         011)
+           envArea="hd1d"
+         ;;
+         100)
+           envArea="hd2a"
+         ;;
+         101)
+           envArea="hd2b"
+         ;;
+         *)
+           envArea="areaerr"
+         ;;
+ esac
+
 #case ${get_envnu:0-4} in
 #	1001)
 #	  projectIsMaster=True
