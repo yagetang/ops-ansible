@@ -81,6 +81,10 @@ ssh-dss AAAAB3NzaC1kc3MAAACBAMFWItAattUUGzxBr+GSdO10MX1c5TLPth2sNHprax/LbxS/UHXT
         chmod 660 /etc/sudoers.d/work-init-users
 	chown work:work /home/${workuser}/.ssh/authorized_keys
 	chmod 600 /home/${workuser}/.ssh/authorized_keys
+        #开启key认证
+        sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+        #禁止用户密码登陆
+        sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
  fi
 
 }
