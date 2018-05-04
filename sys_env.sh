@@ -22,44 +22,44 @@ get_envnu=$(hostname |awk -F'.' '{print $2}')
 #转换环境编码
 case ${get_envnu:0:3} in 
          001) 
-           envType="dev"
+           export envType="dev"
          ;; 
          010) 
-           envType="test"
+           export envType="test"
          ;;
          011) 
-           envType="testing"
+           export envType="testing"
          ;;
          100) 
-           envType="stage"
+           export envType="stage"
          ;;    
          101) 
-           envType="prod"
+           export envType="prod"
          ;; 
          *) 
-           envType="enverr"
+           export envType="enverr"
          ;; 
  esac
 
 #转换地区编码
 case ${get_envnu:3:3} in
          001)
-           envArea="cqyb"
+           export envArea="cqyb"
          ;;
          010)
-           envArea="hd1b"
+           export envArea="hd1b"
          ;;
          011)
-           envArea="hd1d"
+           export envArea="hd1d"
          ;;
          100)
-           envArea="hd2a"
+           export envArea="hd2a"
          ;;
          101)
-           envArea="hd2b"
+           export envArea="hd2b"
          ;;
          *)
-           envArea="areaerr"
+           export envArea="areaerr"
          ;;
  esac
 
