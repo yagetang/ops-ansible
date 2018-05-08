@@ -57,6 +57,7 @@ function func_software_initialization()
 {   
    #安装系统工具
    yum install vim lrzsz iftop iotop ntpdate ncdu gcc-c++ nc tree net-tools nmap vim bash-completion lsof dos2unix telnet ntp rng-tools psmisc tmux unzip zip bc -y
+   yum install zlib zlib-devel openssl openssl--devel pcre pcre-devel -y
    #yum install cloud-init cloud-utils-growpart dracut-modules-growroot -y
    #dracut -f
 }
