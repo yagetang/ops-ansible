@@ -42,9 +42,11 @@ do
         source /${user_name}/.bashrc
      fi
   else
-     if [[ `cat /home/${user_name}/.bashrc |grep ^"PS1" |wc -l` -eq 0 ]];then
-        echo PS1="'\[\e[32;1m\][$envType-$envArea]\[\e[0m\][\u@\h-$get_ipinfo \W]\\$ '" >> /home/${user_name}/.bashrc
-        source /home/${user_name}/.bashrc
+     if [[ -f /home/${user_name}/.bashrc ]];then
+        if [[ `cat /home/${user_name}/.bashrc |grep ^"PS1" |wc -l` -eq 0 ]];then
+           echo PS1="'\[\e[32;1m\][$envType-$envArea]\[\e[0m\][\u@\h-$get_ipinfo \W]\\$ '" >> /home/${user_name}/.bashrc
+           source /home/${user_name}/.bashrc
+        fi
      fi
   fi
 

@@ -42,11 +42,11 @@ function func_system_initialization()
   #更新aliyun yum源
    if [ ! -f "/usr/bin/wget" ]; then yum install ntpdate -y; fi
    yum install wget -y
-   if [ -f "/etc/yum.repos.d/CentOS-Base.repo" ]; then mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup; fi  
-   wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo    
-   if [ -f "/etc/yum.repos.d/epel.repo" ]; then mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup; fi  
-   if [ -f "/etc/yum.repos.d/epel-testing.repo" ]; then mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup; fi
-   wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+   #if [ -f "/etc/yum.repos.d/CentOS-Base.repo" ]; then mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup; fi  
+   #wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo    
+   #if [ -f "/etc/yum.repos.d/epel.repo" ]; then mv /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup; fi  
+   #if [ -f "/etc/yum.repos.d/epel-testing.repo" ]; then mv /etc/yum.repos.d/epel-testing.repo /etc/yum.repos.d/epel-testing.repo.backup; fi
+   #wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 
 }
 ####
